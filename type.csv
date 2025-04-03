@@ -1,0 +1,34 @@
+;IATA type code;Model;Aantal
+5;32N;Airbus A320neo;190
+6;32Q;Airbus A321neo;230
+9;ABY;Airbus A300-600 Freighter[4];285
+15;319;Airbus A319;160
+17;320;Airbus A320;190
+21;332;Airbus A330-200;380
+22;333;Airbus A330-300;440
+27;339;Airbus A330-900;380
+32;359;Airbus A350-900;315
+33;351;Airbus A350-1000;350
+57;7M8;Boeing 737 MAX 8;200
+58;7M9;Boeing 737 MAX 9;220
+76;73P;Boeing 737-400 Freighter;188
+83;73W;Boeing 737-700 Winglets;149
+84;73H;Boeing 737-800 Winglets;189
+85;73K;Boeing 737-800 Freighter Winglets;189
+87;73J;Boeing 737-900 Winglets;220
+97;74Y;Boeing 747-400F / Boeing 747-400ERF;550
+99;74N;Boeing 747-8F;605
+110;76W;Boeing 767-300 Winglets / Boeing 767-300ER;351
+111;76Y;Boeing 767-300 Freighter;351
+113;772;Boeing 777-200 / Boeing 777-200ER;440
+117;77X;Boeing 777-200 Freighter;440
+119;77W;Boeing 777-300ER;550
+120;788;Boeing 787-8;381
+121;789;Boeing 787-9;420
+122;781;Boeing 787-10;440
+188;E70;Embraer 170;78
+189;E90;Embraer 190 / Lineage 1000;106
+190;E95;Embraer 195;118
+192;295;Embraer E195-E2;118
+198;E7W;Embraer 175 (long wing);86
+199;E75;Embraer 175 (short wing);86
