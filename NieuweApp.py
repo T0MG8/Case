@@ -18,20 +18,23 @@ from streamlit_folium import st_folium
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 
-# URL van het datasetbestand
-url = "https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat"
+@st.cache_data
+def load_airports_data():
+    url = "https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat"
+    columns = [
+        "Airport ID", "Name", "City", "Country", "IATA", "ICAO", 
+        "Latitude", "Longitude", "Altitude", "Timezone", 
+        "DST", "Tz database time zone", "Type", "Source"
+    ]
+    return pd.read_csv(url, header=None, names=columns)
 
-# Kolomnamen zoals gedefinieerd in de OpenFlights-dataset
-columns = [
-    "Airport ID", "Name", "City", "Country", "IATA", "ICAO", 
-    "Latitude", "Longitude", "Altitude", "Timezone", 
-    "DST", "Tz database time zone", "Type", "Source"
-]
+df = load_airports_data()
 
-# Inlezen van het CSV-bestand
-df = pd.read_csv(url, header=None, names=columns)
+@st.cache_data
+def load_schiphol_data():
+    return pd.read_csv("Schiphol.csv")
 
-df1 = pd.read_csv("Schiphol.csv")
+df1 = load_schiphol_data()
 
 # Toon alle kolommen
 pd.set_option('display.max_columns', None)
@@ -95,7 +98,12 @@ if pagina == 'Inleiding':
     map = folium.Map(location=coo_schip, zoom_start=2)
 
     # Laad het geoJSON bestand in een GeoDataFrame
-    gdf = gpd.read_file("wereldgrenzen.geojson")
+    @st.cache_data
+    def load_world_boundaries():
+        return gpd.read_file("wereldgrenzen.geojson")
+
+    # Laad de wereldgrenzen
+    gdf = load_world_boundaries()
 
     # Tel het aantal rijen per land
     drukte_per_land = df_merged['Country'].value_counts().to_dict()
@@ -150,7 +158,12 @@ elif pagina == 'Drukte per pier':
     st.write("**Druktekaart per Pier**")
 
     # Functie voor het genereren van een interactieve kaart
-    gdf = gpd.read_file("pier.geojson")
+    @st.cache_data
+    def load_pier_data():
+        return gpd.read_file("pier.geojson")
+
+    # Laad de data
+    gdf = load_pier_data()
         # Maak een folium kaart aan
     m = folium.Map(location=[52.307949, 4.761694], zoom_start=15)
 
@@ -491,20 +504,23 @@ elif pagina == 'Vertraging per pier':
 elif pagina == 'Correlatie':
     st.title("In welke mate bestaat er een correlatie tussen de drukte en de vertraging per pier?")
 
-    # URL van het datasetbestand
-    url = "https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat"
+    @st.cache_data
+    def load_airports_data():
+        url = "https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat"
+        columns = [
+            "Airport ID", "Name", "City", "Country", "IATA", "ICAO", 
+            "Latitude", "Longitude", "Altitude", "Timezone", 
+            "DST", "Tz database time zone", "Type", "Source"
+        ]
+        return pd.read_csv(url, header=None, names=columns)
 
-    # Kolomnamen zoals gedefinieerd in de OpenFlights-dataset
-    columns = [
-        "Airport ID", "Name", "City", "Country", "IATA", "ICAO", 
-        "Latitude", "Longitude", "Altitude", "Timezone", 
-        "DST", "Tz database time zone", "Type", "Source"
-    ]
+    df = load_airports_data()
 
-    # Inlezen van het CSV-bestand
-    df = pd.read_csv(url, header=None, names=columns)
+    @st.cache_data
+    def load_schiphol_data():
+        return pd.read_csv("Schiphol.csv")
 
-    df1 = pd.read_csv("Schiphol.csv")
+    df1 = load_schiphol_data()
 
     # Toon alle kolommen
     pd.set_option('display.max_columns', None)
